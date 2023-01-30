@@ -18,19 +18,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import me.otomir23.partyverse.ui.MapWrapper
 import me.otomir23.partyverse.ui.permissions.RuntimePermissionPopup
 import me.otomir23.partyverse.ui.theme.PartyverseTheme
 
 class MainActivity : ComponentActivity() {
-    private lateinit var auth: FirebaseAuth
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        auth = Firebase.auth
         setContent {
             PartyverseTheme {
                 MainScreen()
