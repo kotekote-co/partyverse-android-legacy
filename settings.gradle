@@ -1,0 +1,27 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url 'https://api.mapbox.com/downloads/v2/releases/maven'
+            authentication {
+                basic(BasicAuthentication)
+            }
+            credentials {
+                username = "mapbox"
+                // You need to configure MAPBOX_DOWNLOADS_TOKEN in your ~/.gradle/gradle.properties
+                password = MAPBOX_DOWNLOADS_TOKEN
+            }
+        }
+    }
+}
+rootProject.name = "partyverse"
+include ':app'
