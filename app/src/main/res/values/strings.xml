@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">partyverse</string>
-    <string name="mapbox_access_token" translatable="false">pk.eyJ1Ijoib3RvbWlyMjMiLCJhIjoiY2xkNjlhdHlqMDA0NDNwbXd0bHZoMzM3bSJ9.YnspHx_dpz0cLukWaxlocg</string>
     <string name="mapbox_style_url" translatable="false">mapbox://styles/otomir23/cld7ah07z000p01ntkdquh9r2</string>
     <string name="location_request">you need to give the app location permission to be able to share your location with friends</string>
     <string name="location_request_insist">sorry, but the app can\'t function without the location permission. we promise to keep your information safe.</string>
