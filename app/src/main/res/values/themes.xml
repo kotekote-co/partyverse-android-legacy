@@ -2,5 +2,7 @@
 <resources>
 
     <style name="Theme.Partyverse" parent="android:Theme.Material.Light.NoActionBar.TranslucentDecor">
+        <item name="android:windowTranslucentNavigation">false</item>
     </style>
+
 </resources>
