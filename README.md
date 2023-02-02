@@ -5,12 +5,25 @@ meow
 ## Build it yourself
 
 1. Obtain Mapbox tokens using this [guide](https://docs.mapbox.com/android/maps/guides/install/#configure-credentials).
-2. Create a file named `gradle.properties` in the ~/.gradle directory and add the following lines:
+2. Crete a Supabase project and copy URL and public token from the project settings.
+3. Create a file named `gradle.properties` in the ~/.gradle directory and add the following lines:
 ```
 MAPBOX_DOWNLOADS_TOKEN=<your downloads token>
 ``` 
-3. Create a file named `secrets.xml` in the `app/src/main/res/values` directory and add the public token there.
-4. Build the app using Android Studio.
+4. Create a file named `secrets.xml` in the `app/src/main/res/values` directory and add the following lines:
+```
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="mapbox_style_url">[your mapbox style url or the default one]</string>
+    <string name="mapbox_access_token">[your mapbox public token]</string>
+    <string name="supabase_url">[your supabase url]</string>
+    <string name="supabase_public_token">[your supabase public token]</string>
+</resources>
+```
+5. Build the app using Android Studio.
+
+> URL of our Mapbox style: `mapbox://styles/otomir23/cld7ah07z000p01ntkdquh9r2`.
+> We can provide supabase credentials on request, but you can decompile them anyway so it's not a big deal.
 
 ## License
 
