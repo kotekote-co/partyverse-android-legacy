@@ -3,4 +3,6 @@
     <string name="location_request">you need to give the app location permission to be able to share your location with friends</string>
     <string name="location_request_insist">sorry, but the app can\'t function without the location permission. we promise to keep your information safe.</string>
     <string name="location_requset_denied">looks like you decided against giving the permission. sadly the app won\'t work without it. you can always change your mind by going to your phone settings.</string>
+    <string name="center_me_button">Center me</string>
+    <string name="profile_button">Profile</string>
 </resources>

@@ -1,11 +1,8 @@
-package me.otomir23.partyverse.ui
+package me.otomir23.partyverse.ui.map
 
 import android.Manifest
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
@@ -17,38 +14,27 @@ import com.google.accompanist.permissions.rememberPermissionState
 import com.mapbox.geojson.Point
 import com.mapbox.maps.CameraOptions
 import com.mapbox.maps.MapView
-import com.mapbox.maps.plugin.MapPlugin
-import com.mapbox.maps.plugin.Plugin
 import com.mapbox.maps.plugin.annotation.annotations
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions
 import com.mapbox.maps.plugin.annotation.generated.createPointAnnotationManager
-import com.mapbox.maps.plugin.attribution.attribution
-import com.mapbox.maps.plugin.compass.compass
 import com.mapbox.maps.plugin.locationcomponent.location
-import com.mapbox.maps.plugin.logo.logo
-import com.mapbox.maps.plugin.scalebar.scalebar
 import me.otomir23.partyverse.R
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun MapWrapper(showLocation: Boolean = false) {
+fun MapWrapper(
+    providedMapView: MapView? = null,
+    showLocation: Boolean = false,
+    onMove: (Point) -> Unit = {},
+) {
     ConstraintLayout(modifier = Modifier.fillMaxSize()) {
-        val mapboxMap = createRef()
         val context = LocalContext.current
+        val mapboxMap = createRef()
         val canShowLocation = rememberPermissionState(
             permission = Manifest.permission.ACCESS_FINE_LOCATION
         ).status.isGranted
+        val mapView = providedMapView ?: rememberMapView()
 
-        val mapView = remember {
-            MapView(context).apply {
-                getMapboxMap().loadStyleUri(context.getString(R.string.mapbox_style_url))
-                scalebar.enabled = false
-                attribution.enabled = false
-                logo.enabled = false
-                compass.enabled = false
-
-            }
-        }
         val annotationManager = remember {
             mapView.annotations.createPointAnnotationManager().apply {
                 create(
@@ -71,6 +57,8 @@ fun MapWrapper(showLocation: Boolean = false) {
                 }
                 var locationUpdated = false
                 mapView.location.addOnIndicatorPositionChangedListener {
+                    onMove(it)
+
                     if (locationUpdated) return@addOnIndicatorPositionChangedListener
                     mapView.getMapboxMap().setCamera(
                         CameraOptions.Builder()
