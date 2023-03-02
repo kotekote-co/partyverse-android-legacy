@@ -16,6 +16,7 @@ import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.NearMe
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -25,9 +26,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
+import com.mapbox.android.gestures.MoveGestureDetector
 import com.mapbox.geojson.Point
-import com.mapbox.maps.CameraOptions
+import com.mapbox.maps.plugin.gestures.OnMoveListener
+import com.mapbox.maps.plugin.gestures.gestures
 import me.otomir23.partyverse.ui.map.MapWrapper
+import me.otomir23.partyverse.ui.map.getDefaultCamera
 import me.otomir23.partyverse.ui.map.rememberMapView
 import me.otomir23.partyverse.ui.permissions.RuntimePermissionPopup
 import me.otomir23.partyverse.ui.theme.PartyverseTheme
@@ -52,6 +56,19 @@ fun MainScreen() {
     )
     val mapView = rememberMapView()
     val lastKnownLocation = remember { mutableStateOf<Point?>(null) }
+    val following = remember { mutableStateOf(true) }
+
+    LaunchedEffect(Unit) {
+        mapView.gestures.addOnMoveListener(object : OnMoveListener {
+            override fun onMove(detector: MoveGestureDetector): Boolean = false
+
+            override fun onMoveBegin(detector: MoveGestureDetector) {
+                following.value = false
+            }
+
+            override fun onMoveEnd(detector: MoveGestureDetector) {}
+        })
+    }
 
     val bottomSheetScaffoldState = rememberBottomSheetScaffoldState()
     BottomSheetScaffold(
@@ -60,13 +77,9 @@ fun MainScreen() {
             FloatingActionButton(
                 onClick = {
                     lastKnownLocation.value?.let {
-                        mapView.getMapboxMap().setCamera(
-                            CameraOptions.Builder()
-                                .center(it)
-                                .zoom(15.0)
-                                .build()
-                        )
+                        mapView.getMapboxMap().setCamera(getDefaultCamera(it))
                     }
+                    following.value = true
                 },
                 backgroundColor = MaterialTheme.colors.primary
             ) {
@@ -107,6 +120,9 @@ fun MainScreen() {
                 providedMapView = mapView,
                 onMove = {
                     lastKnownLocation.value = it
+                    if (following.value) {
+                        mapView.getMapboxMap().setCamera(getDefaultCamera(it))
+                    }
                 }
             )
             Button(

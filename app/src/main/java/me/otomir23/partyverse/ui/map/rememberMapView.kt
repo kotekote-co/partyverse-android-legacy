@@ -3,6 +3,8 @@ package me.otomir23.partyverse.ui.map
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
+import com.mapbox.geojson.Point
+import com.mapbox.maps.CameraOptions
 import com.mapbox.maps.MapView
 import com.mapbox.maps.plugin.attribution.attribution
 import com.mapbox.maps.plugin.compass.compass
@@ -22,4 +24,11 @@ fun rememberMapView(): MapView {
             compass.enabled = false
         }
     }
+}
+
+fun getDefaultCamera(userPos: Point): CameraOptions {
+    return CameraOptions.Builder()
+        .center(userPos)
+        .zoom(15.0)
+        .build()
 }
