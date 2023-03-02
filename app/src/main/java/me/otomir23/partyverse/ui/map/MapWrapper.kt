@@ -13,9 +13,6 @@ import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
 import com.mapbox.geojson.Point
 import com.mapbox.maps.MapView
-import com.mapbox.maps.plugin.annotation.annotations
-import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions
-import com.mapbox.maps.plugin.annotation.generated.createPointAnnotationManager
 import com.mapbox.maps.plugin.locationcomponent.location
 import me.otomir23.partyverse.R
 
@@ -33,19 +30,6 @@ fun MapWrapper(
             permission = Manifest.permission.ACCESS_FINE_LOCATION
         ).status.isGranted
         val mapView = providedMapView ?: rememberMapView()
-
-        val annotationManager = remember {
-            mapView.annotations.createPointAnnotationManager().apply {
-                create(
-                    PointAnnotationOptions()
-                        .withPoint(Point.fromLngLat(37.458313, 55.660513))
-                        .withIconImage("marker")
-                        .withTextField("здесь были убиты пять человек тринадцатого марта")
-                        .withTextColor(context.getColor(R.color.white))
-                        .withTextSize(12.0)
-                )
-            }
-        }
 
         DisposableEffect(canShowLocation, showLocation) {
             if (canShowLocation && showLocation) {
