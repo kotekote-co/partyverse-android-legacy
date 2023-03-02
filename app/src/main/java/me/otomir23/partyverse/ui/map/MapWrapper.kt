@@ -12,7 +12,6 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
 import com.mapbox.geojson.Point
-import com.mapbox.maps.CameraOptions
 import com.mapbox.maps.MapView
 import com.mapbox.maps.plugin.annotation.annotations
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions
@@ -48,30 +47,24 @@ fun MapWrapper(
             }
         }
 
-        LaunchedEffect(canShowLocation, showLocation) {
+        DisposableEffect(canShowLocation, showLocation) {
             if (canShowLocation && showLocation) {
                 mapView.location.updateSettings {
                     enabled = true
                     pulsingEnabled = true
                     pulsingColor = context.getColor(R.color.purple_500)
                 }
-                var locationUpdated = false
-                mapView.location.addOnIndicatorPositionChangedListener {
-                    onMove(it)
+                mapView.location.addOnIndicatorPositionChangedListener(onMove)
 
-                    if (locationUpdated) return@addOnIndicatorPositionChangedListener
-                    mapView.getMapboxMap().setCamera(
-                        CameraOptions.Builder()
-                            .center(it)
-                            .zoom(15.0)
-                            .build()
-                    )
-                    locationUpdated = true
+                onDispose {
+                    mapView.location.removeOnIndicatorPositionChangedListener(onMove)
                 }
             } else {
                 mapView.location.updateSettings {
                     enabled = false
                 }
+
+                onDispose {}
             }
         }
 
