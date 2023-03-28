@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">пативёрс</string>
-    <string name="location_request">для того чтобы делиться твоим местоположением с друзьями, тебе нужно дать приложению доступ к геолокации</string>
-    <string name="location_request_insist">прости, но приложение не сможет работать без доступа к местоположению. мы обещаем надёжно хранить твои данные.</string>
+    <string name="app_name">Пативёрс</string>
+    <string name="location_request">для того чтобы делиться своим местоположением с друзьями, тебе нужно дать приложению доступ к геолокации</string>
+    <string name="location_request_insist">прости, но приложение не сможет работать без доступа к местоположению.</string>
     <string name="location_requset_denied">похоже ты не хочешь давать разрешение. приложение не будет работать без него. если вдруг передумаешь - разрешение можно дать в настройках.</string>
-    <string name="center_me_button">Центировать меня</string>
+    <string name="center_me_button">Центировать</string>
     <string name="profile_button">Профиль</string>
 </resources>
