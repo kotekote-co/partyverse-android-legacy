@@ -1,4 +1,4 @@
-package me.otomir23.partyverse.ui.permissions
+package co.kotekote.partyverse.ui.permissions
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement

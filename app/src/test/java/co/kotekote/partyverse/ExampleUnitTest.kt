@@ -1,4 +1,4 @@
-package me.otomir23.partyverse
+package co.kotekote.partyverse
 
 import org.junit.Test
 

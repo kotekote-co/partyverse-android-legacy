@@ -1,4 +1,4 @@
-package me.otomir23.partyverse.ui.map
+package co.kotekote.partyverse.ui.map
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -10,7 +10,7 @@ import com.mapbox.maps.plugin.attribution.attribution
 import com.mapbox.maps.plugin.compass.compass
 import com.mapbox.maps.plugin.logo.logo
 import com.mapbox.maps.plugin.scalebar.scalebar
-import me.otomir23.partyverse.R
+import co.kotekote.partyverse.R
 
 @Composable
 fun rememberMapView(): MapView {

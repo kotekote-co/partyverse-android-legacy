@@ -1,4 +1,4 @@
-package me.otomir23.partyverse.ui.theme
+package co.kotekote.partyverse.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

@@ -1,4 +1,4 @@
-package me.otomir23.partyverse
+package co.kotekote.partyverse
 
 import android.Manifest
 import android.os.Bundle
@@ -30,11 +30,11 @@ import com.mapbox.android.gestures.MoveGestureDetector
 import com.mapbox.geojson.Point
 import com.mapbox.maps.plugin.gestures.OnMoveListener
 import com.mapbox.maps.plugin.gestures.gestures
-import me.otomir23.partyverse.ui.map.MapWrapper
-import me.otomir23.partyverse.ui.map.getDefaultCamera
-import me.otomir23.partyverse.ui.map.rememberMapView
-import me.otomir23.partyverse.ui.permissions.RuntimePermissionPopup
-import me.otomir23.partyverse.ui.theme.PartyverseTheme
+import co.kotekote.partyverse.ui.map.MapWrapper
+import co.kotekote.partyverse.ui.map.getDefaultCamera
+import co.kotekote.partyverse.ui.map.rememberMapView
+import co.kotekote.partyverse.ui.permissions.RuntimePermissionPopup
+import co.kotekote.partyverse.ui.theme.PartyverseTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,4 +1,4 @@
-package me.otomir23.partyverse.ui.permissions
+package co.kotekote.partyverse.ui.permissions
 
 import android.app.Activity
 import androidx.compose.material.*

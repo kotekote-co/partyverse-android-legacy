@@ -1,4 +1,4 @@
-package me.otomir23.partyverse.ui.map
+package co.kotekote.partyverse.ui.map
 
 import android.Manifest
 import androidx.compose.foundation.layout.*
@@ -14,7 +14,7 @@ import com.google.accompanist.permissions.rememberPermissionState
 import com.mapbox.geojson.Point
 import com.mapbox.maps.MapView
 import com.mapbox.maps.plugin.locationcomponent.location
-import me.otomir23.partyverse.R
+import co.kotekote.partyverse.R
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable

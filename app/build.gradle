@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'me.otomir23.partyverse'
+    namespace 'co.kotekote.partyverse'
     compileSdk 33
 
     defaultConfig {
