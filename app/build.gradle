@@ -71,4 +71,6 @@ dependencies {
     implementation "io.github.jan-tennert.supabase:gotrue-kt:$supabase_version"
     implementation "io.github.jan-tennert.supabase:realtime-kt:$supabase_version"
     implementation "io.github.jan-tennert.supabase:postgrest-kt:$supabase_version"
+
+    implementation 'androidx.core:core-splashscreen:1.0.0'
 }

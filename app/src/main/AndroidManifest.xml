@@ -18,7 +18,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.Partyverse">
+            android:theme="@style/Theme.partyverse.MySplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
