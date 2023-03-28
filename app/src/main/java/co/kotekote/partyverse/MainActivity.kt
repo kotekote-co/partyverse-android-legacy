@@ -22,20 +22,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import co.kotekote.partyverse.ui.map.MapWrapper
+import co.kotekote.partyverse.ui.map.getDefaultCamera
+import co.kotekote.partyverse.ui.map.rememberMapView
+import co.kotekote.partyverse.ui.permissions.RuntimePermissionPopup
+import co.kotekote.partyverse.ui.theme.PartyverseTheme
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
 import com.mapbox.android.gestures.MoveGestureDetector
 import com.mapbox.geojson.Point
 import com.mapbox.maps.plugin.gestures.OnMoveListener
 import com.mapbox.maps.plugin.gestures.gestures
-import co.kotekote.partyverse.ui.map.MapWrapper
-import co.kotekote.partyverse.ui.map.getDefaultCamera
-import co.kotekote.partyverse.ui.map.rememberMapView
-import co.kotekote.partyverse.ui.permissions.RuntimePermissionPopup
-import co.kotekote.partyverse.ui.theme.PartyverseTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -152,12 +151,4 @@ fun MainScreen() {
         icon = Icons.Filled.LocationOn,
         required = true
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    PartyverseTheme {
-        MainScreen()
-    }
 }
