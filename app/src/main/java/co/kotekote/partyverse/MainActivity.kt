@@ -15,7 +15,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            PartyverseTheme(darkTheme = true) {
+            PartyverseTheme(darkTheme = false) {
                 navController = rememberNavController()
                 SetupNavGraph(navController = navController)
             }
