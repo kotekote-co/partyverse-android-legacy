@@ -6,14 +6,14 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccessibleForward
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import co.kotekote.partyverse.R
 
 @Composable
 fun ProfileScreen(navController: NavController) {
@@ -35,7 +35,7 @@ fun ProfileCard() {
                 .padding(all = 8.dp)
         ) {
             Icon(
-                painter = painterResource(R.drawable.baseline_accessible_forward_24),
+                Icons.Default.AccessibleForward,
                 contentDescription = "icon",
                 modifier = Modifier
                     .clip(shape = RoundedCornerShape(15.dp))
@@ -47,7 +47,7 @@ fun ProfileCard() {
 
             Column {
                 Text(text = "keet", color = MaterialTheme.colors.secondaryVariant)
-                Text(text = "кстати, я хуесос")
+                Text(text = "мяу мяу я котик")
             }
         }
     }
