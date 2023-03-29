@@ -1,7 +1,6 @@
 package co.kotekote.partyverse.screens
 
 import android.Manifest
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
