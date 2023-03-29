@@ -4,6 +4,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
 
 private val DarkColorPalette = darkColors(
@@ -18,6 +19,8 @@ private val LightColorPalette = lightColors(
     secondary = Teal200,
 )
 
+val LocalDarkThemeState = compositionLocalOf { false }
+
 @Composable
 fun PartyverseTheme(darkTheme: Boolean, content: @Composable () -> Unit) {
     val colors = if (darkTheme) {
@@ -25,10 +28,15 @@ fun PartyverseTheme(darkTheme: Boolean, content: @Composable () -> Unit) {
     } else {
         LightColorPalette
     }
-    MaterialTheme(
-        colors = colors,
-        typography = Typography,
-        shapes = Shapes,
-        content = content
-    )
+
+    CompositionLocalProvider(
+        LocalDarkThemeState provides darkTheme
+    ) {
+        MaterialTheme(
+            colors = colors,
+            typography = Typography,
+            shapes = Shapes,
+            content = content
+        )
+    }
 }
