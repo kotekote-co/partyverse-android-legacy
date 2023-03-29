@@ -3,6 +3,7 @@ package co.kotekote.partyverse
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import co.kotekote.partyverse.ui.navigation.SetupNavGraph
@@ -15,7 +16,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            PartyverseTheme(darkTheme = false) {
+            PartyverseTheme(darkTheme = isSystemInDarkTheme()) {
                 navController = rememberNavController()
                 SetupNavGraph(navController = navController)
             }
