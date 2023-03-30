@@ -3,6 +3,7 @@ package co.kotekote.partyverse.screens
 import android.Manifest
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -84,7 +85,7 @@ fun MainScreen(
                 modifier = Modifier.padding(16.dp),
                 style = MaterialTheme.typography.h5
             )
-            LazyColumn {
+            LazyColumn(modifier = Modifier.heightIn(min = 0.dp, max = 658.dp)) {
                 items(25) {
                     ListItem(
                         text = { Text("Item $it") },
@@ -98,7 +99,7 @@ fun MainScreen(
                 }
             }
         },
-        sheetShape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
+        sheetShape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp),
         scaffoldState = bottomSheetScaffoldState
     ) {
         Box(
