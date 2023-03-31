@@ -8,7 +8,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "me.otomir23.partyverse"
+        applicationId "co.kotekote.partyverse"
         minSdk 26
         targetSdk 33
         versionCode 1
