@@ -13,13 +13,8 @@ fun SetupNavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Splash.route
+        startDestination = Screen.Home.route
     ) {
-        composable(
-            route = Screen.Splash.route
-        ) {
-            AnimatedSplashScreen(navController = navController)
-        }
         composable(
             route = Screen.Home.route
         ) {
