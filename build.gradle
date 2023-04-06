@@ -1,7 +1,7 @@
 buildscript {
     ext {
-        compose_ui_version = '1.4.0'
-        supabase_version = '0.7.6'
+        compose_ui_version = '1.4.1'
+        supabase_version = '0.8.5'
     }
 }// Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
