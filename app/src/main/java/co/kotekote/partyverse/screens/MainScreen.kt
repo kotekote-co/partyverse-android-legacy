@@ -64,7 +64,7 @@ fun MainScreen(
         sheetPeekHeight = 128.dp,
         sheetContent = {
             Text(
-                "Доброе утро, Женя!",
+                context.getString(R.string.greetings),
                 modifier = Modifier.padding(16.dp),
                 style = MaterialTheme.typography.h5
             )
