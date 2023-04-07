@@ -30,6 +30,7 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
 import com.mapbox.android.gestures.MoveGestureDetector
 import com.mapbox.geojson.Point
+import com.mapbox.maps.plugin.animation.flyTo
 import com.mapbox.maps.plugin.gestures.OnMoveListener
 import com.mapbox.maps.plugin.gestures.gestures
 
@@ -93,7 +94,7 @@ fun MainScreen(
                 onMove = {
                     lastKnownLocation.value = it
                     if (following.value) {
-                        mapView.getMapboxMap().setCamera(getDefaultCamera(it))
+                        mapView.getMapboxMap().flyTo(getDefaultCamera(it))
                     }
                 }
             )
@@ -106,7 +107,7 @@ fun MainScreen(
                 .size(40.dp),
                 onClick = {
                     lastKnownLocation.value?.let {
-                        mapView.getMapboxMap().setCamera(getDefaultCamera(it))
+                        mapView.getMapboxMap().flyTo(getDefaultCamera(it))
                     }
                     following.value = true
                 }) {
