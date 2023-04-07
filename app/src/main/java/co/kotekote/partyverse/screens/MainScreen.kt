@@ -1,11 +1,10 @@
 package co.kotekote.partyverse.screens
 
 import android.Manifest
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -63,22 +62,6 @@ fun MainScreen(
     val bottomSheetScaffoldState = rememberBottomSheetScaffoldState()
     BottomSheetScaffold(
         sheetPeekHeight = 128.dp,
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = {
-                    lastKnownLocation.value?.let {
-                        mapView.getMapboxMap().setCamera(getDefaultCamera(it))
-                    }
-                    following.value = true
-                },
-                backgroundColor = MaterialTheme.colors.primary
-            ) {
-                Icon(
-                    Icons.Filled.NearMe,
-                    contentDescription = context.getString(R.string.center_me_button)
-                )
-            }
-        },
         sheetContent = {
             Text(
                 "Доброе утро, Женя!",
@@ -115,13 +98,34 @@ fun MainScreen(
                     }
                 }
             )
+
+            IconButton(modifier = Modifier
+                .statusBarsPadding()
+                .align(Alignment.BottomStart)
+                .padding(start = 15.dp, bottom = 140.dp)
+                .background(MaterialTheme.colors.primary, shape = RoundedCornerShape(10.dp))
+                .size(40.dp),
+                onClick = {
+                    lastKnownLocation.value?.let {
+                        mapView.getMapboxMap().setCamera(getDefaultCamera(it))
+                    }
+                    following.value = true
+                }) {
+                Icon(
+                    Icons.Filled.NearMe,
+                    contentDescription = context.getString(R.string.center_me_button),
+                    tint = MaterialTheme.colors.background,
+                    modifier = Modifier.size(20.dp)
+                )
+            }
+
             Button(
                 onClick = {
                     navController.navigate(Screen.Profile.route)
                 },
                 modifier = Modifier
-                    .padding(16.dp)
-                    .padding(top = 32.dp)
+                    .statusBarsPadding()
+                    .padding(top = 6.dp, end = 10.dp)
                     .align(Alignment.TopEnd)
             ) {
                 Icon(
