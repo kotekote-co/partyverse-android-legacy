@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import co.kotekote.partyverse.R
 import co.kotekote.partyverse.ui.theme.LocalDarkThemeState
 import com.mapbox.geojson.Point
@@ -19,6 +20,11 @@ fun rememberMapView(): MapView {
     val context = LocalContext.current
     val darkTheme = LocalDarkThemeState.current
 
+    val mapboxStyleUri = stringResource(
+        if (darkTheme) R.string.mapbox_dark_style_url
+        else R.string.mapbox_light_style_url
+    )
+
     val mapView = remember {
         MapView(context).apply {
             scalebar.enabled = false
@@ -28,13 +34,8 @@ fun rememberMapView(): MapView {
         }
     }
 
-    LaunchedEffect(darkTheme) {
-        mapView.getMapboxMap().loadStyleUri(
-            context.getString(
-                if (darkTheme) R.string.mapbox_dark_style_url
-                else R.string.mapbox_light_style_url
-            )
-        )
+    LaunchedEffect(mapboxStyleUri) {
+        mapView.getMapboxMap().loadStyleUri(mapboxStyleUri)
     }
 
     return mapView

@@ -10,7 +10,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 
@@ -22,8 +22,6 @@ fun PermissionPopup(
     onClick: () -> Unit,
     onDismiss: () -> Unit = {}
 ) {
-    val context = LocalContext.current
-
     if (display) {
         Dialog(onDismissRequest = onDismiss) {
             Surface(
@@ -43,7 +41,7 @@ fun PermissionPopup(
                         onClick = onClick,
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        Text(text = context.getString(android.R.string.ok))
+                        Text(text = stringResource(android.R.string.ok))
                     }
                 }
             }

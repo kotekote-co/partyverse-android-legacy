@@ -17,7 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import co.kotekote.partyverse.R
@@ -39,7 +39,6 @@ import com.mapbox.maps.plugin.gestures.gestures
 fun MainScreen(
     navController: NavController
 ) {
-    val context = LocalContext.current
     val locationPermissionState = rememberPermissionState(
         permission = Manifest.permission.ACCESS_FINE_LOCATION
     )
@@ -113,7 +112,7 @@ fun MainScreen(
                 }) {
                 Icon(
                     Icons.Filled.NearMe,
-                    contentDescription = context.getString(R.string.center_me_button),
+                    contentDescription = stringResource(R.string.center_me_button),
                     tint = MaterialTheme.colors.background,
                     modifier = Modifier.size(20.dp)
                 )
@@ -130,16 +129,16 @@ fun MainScreen(
             ) {
                 Icon(
                     Icons.Filled.Person,
-                    contentDescription = context.getString(R.string.profile_button)
+                    contentDescription = stringResource(R.string.profile_button)
                 )
             }
         }
     }
     RuntimePermissionPopup(
         permissionState = locationPermissionState,
-        explanation = context.getString(R.string.location_request),
-        insistExplanation = context.getString(R.string.location_request_insist),
-        foreverDeniedExplanation = context.getString(R.string.location_requset_denied),
+        explanation = stringResource(R.string.location_request),
+        insistExplanation = stringResource(R.string.location_request_insist),
+        foreverDeniedExplanation = stringResource(R.string.location_requset_denied),
         icon = Icons.Filled.LocationOn,
         required = true
     )

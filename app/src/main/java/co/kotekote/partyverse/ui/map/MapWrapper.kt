@@ -1,11 +1,11 @@
 package co.kotekote.partyverse.ui.map
 
 import android.Manifest
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -25,7 +25,7 @@ fun MapWrapper(
     onMove: (Point) -> Unit = {},
 ) {
     ConstraintLayout(modifier = Modifier.fillMaxSize()) {
-        val context = LocalContext.current
+        val pulseColor = colorResource(R.color.purple_500).toArgb()
         val mapboxMap = createRef()
         val canShowLocation = rememberPermissionState(
             permission = Manifest.permission.ACCESS_FINE_LOCATION
@@ -37,7 +37,7 @@ fun MapWrapper(
                 mapView.location.updateSettings {
                     enabled = true
                     pulsingEnabled = true
-                    pulsingColor = context.getColor(R.color.purple_500)
+                    pulsingColor = pulseColor
                 }
                 mapView.location.addOnIndicatorPositionChangedListener(onMove)
 
