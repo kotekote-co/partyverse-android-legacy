@@ -6,4 +6,5 @@
     <string name="location_requset_denied">похоже ты не хочешь давать разрешение. приложение не будет работать без него. если вдруг передумаешь - разрешение можно дать в настройках.</string>
     <string name="center_me_button">Центировать</string>
     <string name="profile_button">Профиль</string>
+    <string name="greetings">Доброе утро, Женя!</string>
 </resources>
