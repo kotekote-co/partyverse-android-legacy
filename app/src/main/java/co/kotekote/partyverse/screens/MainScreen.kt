@@ -93,7 +93,7 @@ fun MainScreen(
                 onMove = {
                     lastKnownLocation.value = it
                     if (following.value) {
-                        mapView.getMapboxMap().flyTo(getDefaultCamera(it))
+                        mapView.getMapboxMap().setCamera(getDefaultCamera(it))
                     }
                 }
             )
