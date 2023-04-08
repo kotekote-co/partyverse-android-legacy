@@ -7,7 +7,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import co.kotekote.partyverse.ui.navigation.SetupNavGraph
+import co.kotekote.partyverse.ui.navigation.PartyverseNavGraph
 import co.kotekote.partyverse.ui.theme.PartyverseTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             PartyverseTheme(darkTheme = isSystemInDarkTheme()) {
                 navController = rememberNavController()
-                SetupNavGraph(navController = navController)
+                PartyverseNavGraph(navController = navController)
             }
         }
     }

@@ -1,30 +1,35 @@
 package co.kotekote.partyverse.ui.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import co.kotekote.partyverse.screens.MainScreen
-import co.kotekote.partyverse.screens.ProfileScreen
+import co.kotekote.partyverse.ui.screens.MainScreen
+import co.kotekote.partyverse.ui.screens.ProfileScreen
 
 @Composable
-fun SetupNavGraph(
+fun PartyverseNavGraph(
     navController: NavHostController
 ) {
+    val navActions = remember(navController) {
+        NavActions(navController)
+    }
+
     NavHost(
         navController = navController,
-        startDestination = Screen.Home.route
+        startDestination = Routes.HOME
     ) {
         composable(
-            route = Screen.Home.route
+            route = Routes.HOME
         ) {
-            MainScreen(navController = navController)
+            MainScreen(navActions)
         }
         composable(
-            route = Screen.Profile.route,
+            route = Routes.PROFILE,
         )
         {
-            ProfileScreen(navController = navController)
+            ProfileScreen(navActions)
         }
     }
 }

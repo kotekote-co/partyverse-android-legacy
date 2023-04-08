@@ -1,4 +1,4 @@
-package co.kotekote.partyverse.screens
+package co.kotekote.partyverse.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -13,10 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+import co.kotekote.partyverse.ui.navigation.NavActions
 
 @Composable
-fun ProfileScreen(navController: NavController) {
+fun ProfileScreen(navActions: NavActions) {
     Surface(
         modifier = Modifier
             .fillMaxSize()

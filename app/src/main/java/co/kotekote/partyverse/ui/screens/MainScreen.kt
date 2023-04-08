@@ -1,4 +1,4 @@
-package co.kotekote.partyverse.screens
+package co.kotekote.partyverse.ui.screens
 
 import android.Manifest
 import androidx.compose.foundation.background
@@ -19,12 +19,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import co.kotekote.partyverse.R
 import co.kotekote.partyverse.ui.map.MapWrapper
 import co.kotekote.partyverse.ui.map.getDefaultCamera
 import co.kotekote.partyverse.ui.map.rememberMapView
-import co.kotekote.partyverse.ui.navigation.Screen
+import co.kotekote.partyverse.ui.navigation.NavActions
 import co.kotekote.partyverse.ui.permissions.RuntimePermissionPopup
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
@@ -37,7 +36,7 @@ import com.mapbox.maps.plugin.gestures.gestures
 @OptIn(ExperimentalPermissionsApi::class, ExperimentalMaterialApi::class)
 @Composable
 fun MainScreen(
-    navController: NavController
+    navActions: NavActions
 ) {
     val locationPermissionState = rememberPermissionState(
         permission = Manifest.permission.ACCESS_FINE_LOCATION
@@ -119,9 +118,7 @@ fun MainScreen(
             }
 
             Button(
-                onClick = {
-                    navController.navigate(Screen.Profile.route)
-                },
+                onClick = navActions.openProfile,
                 modifier = Modifier
                     .statusBarsPadding()
                     .padding(top = 6.dp, end = 10.dp)
