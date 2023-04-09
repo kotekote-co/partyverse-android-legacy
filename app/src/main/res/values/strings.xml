@@ -7,4 +7,6 @@
     <string name="profile_button">Profile</string>
     <string name="open_settings_button">Open settings</string>
     <string name="greetings">Good morning, Alex!</string>
+    <string name="settings_title">settings</string>
+    <string name="settings_theme_title">preffered theme</string>
 </resources>

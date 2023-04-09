@@ -8,4 +8,6 @@
     <string name="profile_button">Профиль</string>
     <string name="open_settings_button">Открыть настройки</string>
     <string name="greetings">Доброе утро, Женя!</string>
+    <string name="settings_title">настройки</string>
+    <string name="settings_theme_title">предпочитаемая тема</string>
 </resources>

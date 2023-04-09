@@ -23,7 +23,7 @@ fun ProfileScreen(navActions: NavActions) {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text("WIP")
-            IconButton({}) {
+            IconButton(navActions.openSettings) {
                 Icon(
                     Icons.Default.Settings,
                     contentDescription = stringResource(R.string.open_settings_button)

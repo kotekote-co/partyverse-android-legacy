@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+enum PreferredTheme {
+    MATCH_SYSTEM = 0;
+    ALWAYS_LIGHT = 1;
+    ALWAYS_DARK = 2;
+}
+
+message UserSettings {
+    PreferredTheme preferred_theme = 1;
+}
