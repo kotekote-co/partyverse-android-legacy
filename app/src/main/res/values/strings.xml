@@ -9,4 +9,7 @@
     <string name="greetings">Good morning, Alex!</string>
     <string name="settings_title">settings</string>
     <string name="settings_theme_title">preffered theme</string>
+    <string name="settings_theme_system">same as system</string>
+    <string name="settings_theme_light">light</string>
+    <string name="settings_theme_dark">dark</string>
 </resources>

@@ -10,4 +10,7 @@
     <string name="greetings">Доброе утро, Женя!</string>
     <string name="settings_title">настройки</string>
     <string name="settings_theme_title">предпочитаемая тема</string>
+    <string name="settings_theme_system">как в системе</string>
+    <string name="settings_theme_light">светлая</string>
+    <string name="settings_theme_dark">тёмная</string>
 </resources>

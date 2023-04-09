@@ -41,7 +41,11 @@ fun SettingsScreen(@Suppress("UNUSED_PARAMETER") navActions: NavActions) {
         Divider()
         EnumSettingsSection(
             title = stringResource(R.string.settings_theme_title),
-            values = listOf("системная :3", "светлая !", "тёмная..."),
+            values = listOf(
+                stringResource(R.string.settings_theme_system),
+                stringResource(R.string.settings_theme_light),
+                stringResource(R.string.settings_theme_dark),
+            ),
             selected = currentThemePreference.number
         ) { newTheme ->
             coroutineScope.launch {
