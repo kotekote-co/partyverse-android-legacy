@@ -7,12 +7,22 @@ object Routes {
     const val PROFILE = "profile"
 }
 
-class NavActions(navController: NavController) {
-    val navigateHome: () -> Unit = {
+interface NavActions {
+    val navigateHome: () -> Unit
+    val openProfile: () -> Unit
+}
+
+class AppNavActions(navController: NavController) : NavActions {
+    override val navigateHome = {
         navController.navigate(Routes.HOME)
     }
 
-    val openProfile: () -> Unit = {
+    override val openProfile = {
         navController.navigate(Routes.PROFILE)
     }
+}
+
+class PreviewNavActions : NavActions {
+    override val navigateHome = {}
+    override val openProfile = {}
 }

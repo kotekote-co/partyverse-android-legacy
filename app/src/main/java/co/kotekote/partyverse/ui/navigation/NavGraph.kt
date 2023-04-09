@@ -13,7 +13,7 @@ fun PartyverseNavGraph(
     navController: NavHostController
 ) {
     val navActions = remember(navController) {
-        NavActions(navController)
+        AppNavActions(navController)
     }
 
     NavHost(
@@ -27,8 +27,7 @@ fun PartyverseNavGraph(
         }
         composable(
             route = Routes.PROFILE,
-        )
-        {
+        ) {
             ProfileScreen(navActions)
         }
     }
