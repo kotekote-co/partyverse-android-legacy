@@ -5,5 +5,6 @@
     <string name="location_request_denied">looks like you decided against giving the permission. sadly the app won\'t work without it. you can always change your mind by going to your phone settings.</string>
     <string name="center_me_button">Center me</string>
     <string name="profile_button">Profile</string>
+    <string name="open_settings_button">Open settings</string>
     <string name="greetings">Good morning, Alex!</string>
 </resources>

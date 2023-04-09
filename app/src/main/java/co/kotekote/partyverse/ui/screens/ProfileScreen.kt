@@ -1,53 +1,33 @@
 package co.kotekote.partyverse.ui.screens
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccessibleForward
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import co.kotekote.partyverse.R
 import co.kotekote.partyverse.ui.navigation.NavActions
+import co.kotekote.partyverse.ui.navigation.PreviewNavActions
 
 @Composable
 fun ProfileScreen(navActions: NavActions) {
-    Surface(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(start = 15.dp, top = 75.dp)
-            .background(MaterialTheme.colors.background)
-    ) {
-        ProfileCard()
-    }
-}
-
-@Composable
-fun ProfileCard() {
-    Card {
+    Column(Modifier.statusBarsPadding().padding(16.dp, 0.dp)) {
         Row(
-            modifier = Modifier
-                .padding(all = 8.dp)
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Icon(
-                Icons.Default.AccessibleForward,
-                contentDescription = "icon",
-                modifier = Modifier
-                    .clip(shape = RoundedCornerShape(15.dp))
-                    .size(40.dp)
-                    .border(1.dp, MaterialTheme.colors.secondary, CircleShape)
-            )
-
-            Spacer(modifier = Modifier.width(8.dp))
-
-            Column {
-                Text(text = "keet", color = MaterialTheme.colors.secondaryVariant)
-                Text(text = "мяу мяу я котик")
+            Text("WIP")
+            IconButton({}) {
+                Icon(
+                    Icons.Default.Settings,
+                    contentDescription = stringResource(R.string.open_settings_button)
+                )
             }
         }
     }
@@ -55,6 +35,6 @@ fun ProfileCard() {
 
 @Preview
 @Composable
-fun ProfileCardPreview() {
-    ProfileCard()
+fun ProfileScreenPreview() {
+    ProfileScreen(PreviewNavActions())
 }
