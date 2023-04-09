@@ -135,7 +135,7 @@ fun MainScreen(
         permissionState = locationPermissionState,
         explanation = stringResource(R.string.location_request),
         insistExplanation = stringResource(R.string.location_request_insist),
-        foreverDeniedExplanation = stringResource(R.string.location_requset_denied),
+        foreverDeniedExplanation = stringResource(R.string.location_request_denied),
         icon = Icons.Filled.LocationOn,
         required = true
     )
