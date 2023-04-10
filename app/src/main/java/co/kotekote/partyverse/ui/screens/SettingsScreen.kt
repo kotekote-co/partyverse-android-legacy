@@ -82,7 +82,8 @@ private fun EnumSettingsSection(title: String, values: List<String>, selected: I
                             },
                             role = Role.RadioButton
                         )
-                        .padding(16.dp),
+                        .padding(16.dp)
+                        .fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     RadioButton(
