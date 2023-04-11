@@ -19,8 +19,8 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import co.kotekote.partyverse.R
-import co.kotekote.partyverse.data.settingsDataStore
-import co.kotekote.partyverse.data.themePreferenceState
+import co.kotekote.partyverse.data.settings.settingsDataStore
+import co.kotekote.partyverse.data.settings.themePreferenceState
 import co.kotekote.partyverse.ui.navigation.NavActions
 import co.kotekote.partyverse.ui.navigation.PreviewNavActions
 import kotlinx.coroutines.launch

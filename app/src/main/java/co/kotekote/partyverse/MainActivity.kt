@@ -7,8 +7,8 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.getValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavHostController
-import co.kotekote.partyverse.data.subscribeToDarkTheme
-import co.kotekote.partyverse.data.themePreferenceState
+import co.kotekote.partyverse.data.settings.subscribeToDarkTheme
+import co.kotekote.partyverse.data.settings.themePreferenceState
 import co.kotekote.partyverse.ui.navigation.PartyverseNavGraph
 import co.kotekote.partyverse.ui.theme.PartyverseTheme
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController

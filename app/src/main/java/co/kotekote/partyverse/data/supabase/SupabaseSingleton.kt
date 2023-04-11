@@ -1,4 +1,4 @@
-package co.kotekote.partyverse.utils
+package co.kotekote.partyverse.data.supabase
 
 import android.content.Context
 import io.github.jan.supabase.SupabaseClient

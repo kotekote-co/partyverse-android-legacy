@@ -1,4 +1,4 @@
-package co.kotekote.partyverse.data
+package co.kotekote.partyverse.data.settings
 
 import Settings.PreferredTheme
 import Settings.UserSettings
