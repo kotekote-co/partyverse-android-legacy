@@ -1,14 +1,18 @@
 package co.kotekote.partyverse.ui.navigation
 
+import androidx.compose.animation.*
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import co.kotekote.partyverse.ui.screens.MainScreen
-import co.kotekote.partyverse.ui.screens.SettingsScreen
 import co.kotekote.partyverse.ui.screens.ProfileScreen
+import co.kotekote.partyverse.ui.screens.SettingsScreen
+import com.google.accompanist.navigation.animation.AnimatedNavHost
+import com.google.accompanist.navigation.animation.composable
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun PartyverseNavGraph(
     navController: NavHostController
@@ -17,22 +21,41 @@ fun PartyverseNavGraph(
         AppNavActions(navController)
     }
 
-    NavHost(
+    AnimatedNavHost(
         navController = navController,
         startDestination = Routes.HOME
     ) {
         composable(
-            route = Routes.HOME
+            route = Routes.HOME,
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = {-1500},
+                    animationSpec = tween(
+                        durationMillis = 300,
+                        easing = FastOutSlowInEasing
+                    )
+                ) +
+                        fadeOut(animationSpec = tween(300))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = {-1500},
+                    animationSpec = tween(
+                        durationMillis = 300,
+                        easing = FastOutSlowInEasing
+                    )
+                ) + fadeIn(animationSpec = tween(300))
+            }
         ) {
             MainScreen(navActions)
         }
         composable(
-            route = Routes.PROFILE,
+            route = Routes.PROFILE
         ) {
             ProfileScreen(navActions)
         }
         composable(
-            route = Routes.SETTINGS,
+            route = Routes.SETTINGS
         ) {
             SettingsScreen(navActions)
         }
