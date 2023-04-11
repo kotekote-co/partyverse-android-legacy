@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.getValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.navigation.NavHostController
 import co.kotekote.partyverse.data.settings.subscribeToDarkTheme
 import co.kotekote.partyverse.data.settings.themePreferenceState
 import co.kotekote.partyverse.ui.navigation.PartyverseNavGraph
@@ -15,8 +14,6 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
 class MainActivity : ComponentActivity() {
 
-    lateinit var navController: NavHostController
-
     @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +21,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val preferredTheme by themePreferenceState(this)
             PartyverseTheme(darkTheme = preferredTheme.subscribeToDarkTheme()) {
-                navController = rememberAnimatedNavController()
+                val navController = rememberAnimatedNavController()
                 PartyverseNavGraph(navController = navController)
             }
         }
