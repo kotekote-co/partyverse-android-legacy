@@ -45,7 +45,7 @@ fun ProfileScreen(navActions: NavActions) {
     }
 }
 
-@Preview(name = "LightProfilePreview", group = "Light", showBackground = true, showSystemUi = true)
+@Preview(showBackground = true)
 @Composable
 fun ProfileScreenPreview() {
     ProfileScreen(PreviewNavActions())

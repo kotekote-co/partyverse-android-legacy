@@ -1,5 +1,6 @@
 package co.kotekote.partyverse.ui.screens
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
@@ -101,7 +102,7 @@ private fun EnumSettingsSection(title: String, values: List<String>, selected: I
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun SettingsScreenPreview() {
     SettingsScreen(PreviewNavActions())
