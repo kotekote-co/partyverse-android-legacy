@@ -1,6 +1,6 @@
 package co.kotekote.partyverse.ui.screens
 
-import android.content.res.Configuration
+import Settings
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
