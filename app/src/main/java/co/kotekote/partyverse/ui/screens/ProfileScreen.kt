@@ -1,7 +1,14 @@
 package co.kotekote.partyverse.ui.screens
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
@@ -16,9 +23,14 @@ import co.kotekote.partyverse.ui.navigation.PreviewNavActions
 
 @Composable
 fun ProfileScreen(navActions: NavActions) {
-    Column(Modifier.statusBarsPadding().padding(16.dp, 0.dp)) {
+    Column(
+        Modifier
+            .statusBarsPadding()
+            .padding(16.dp, 0.dp)) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 25.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
