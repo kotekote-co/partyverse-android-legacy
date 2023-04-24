@@ -12,4 +12,17 @@
     <string name="settings_theme_system">same as system</string>
     <string name="settings_theme_light">light</string>
     <string name="settings_theme_dark">dark</string>
+    <string name="error_connection">unable to connect to the server, check ur connection or try again later</string>
+    <string name="error_unknown">an unknown error occurred, you should try again later</string>
+    <string name="error_login_credentials">couldn\'t authenticate you, probably because the credentials are wrong</string>
+    <string name="error_signup_credentials">couldn\'t create ur account, either email is taken or fields are invalid</string>
+    <string name="signup_success">done, check ur email to complete signup</string>
+    <string name="show_password_button">Show password</string>
+    <string name="hide_password_button">Hide password</string>
+    <string name="signup_button">sign up</string>
+    <string name="login_button">log in</string>
+    <string name="email_field">email</string>
+    <string name="password_field">pass</string>
+    <string name="error_connection_short">no internet connection</string>
+    <string name="logout_button">logout</string>
 </resources>

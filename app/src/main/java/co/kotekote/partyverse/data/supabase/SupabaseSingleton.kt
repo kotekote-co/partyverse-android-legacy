@@ -1,12 +1,12 @@
 package co.kotekote.partyverse.data.supabase
 
 import android.content.Context
+import co.kotekote.partyverse.R
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.gotrue.GoTrue
 import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.realtime.Realtime
-import co.kotekote.partyverse.R
 
 object SupabaseSingleton {
     private var client: SupabaseClient? = null
@@ -17,7 +17,10 @@ object SupabaseSingleton {
                 supabaseUrl = ctx.getString(R.string.supabase_url),
                 supabaseKey = ctx.getString(R.string.supabase_public_token)
             ) {
-                install(GoTrue)
+                install(GoTrue) {
+                    scheme = "co.kotekote.partyverse"
+                    host = "auth"
+                }
                 install(Realtime)
                 install(Postgrest)
             }

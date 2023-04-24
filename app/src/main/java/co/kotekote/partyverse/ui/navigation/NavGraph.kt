@@ -6,6 +6,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
+import co.kotekote.partyverse.ui.screens.LoginScreen
 import co.kotekote.partyverse.ui.screens.MainScreen
 import co.kotekote.partyverse.ui.screens.ProfileScreen
 import co.kotekote.partyverse.ui.screens.SettingsScreen
@@ -58,6 +59,11 @@ fun PartyverseNavGraph(
             route = Routes.SETTINGS
         ) {
             SettingsScreen(navActions)
+        }
+        composable(
+            route = Routes.LOGIN
+        ) {
+            LoginScreen(navActions)
         }
     }
 }

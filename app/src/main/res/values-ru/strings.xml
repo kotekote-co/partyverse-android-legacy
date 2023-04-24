@@ -13,4 +13,17 @@
     <string name="settings_theme_system">как в системе</string>
     <string name="settings_theme_light">светлая</string>
     <string name="settings_theme_dark">тёмная</string>
+    <string name="error_connection">не удалось подключиться к серверу, проверь интрнет и поробуй снова</string>
+    <string name="error_unknown">упс, что-то пошло не так. попробуй пожалуйста чуть позже.</string>
+    <string name="error_login_credentials">не удалось авторизоваться, наверное ты ввёл неверный логин или пароль</string>
+    <string name="error_signup_credentials">не удалось создать аккаунт, похоже почта занята или некоторые поля неверно заполнены</string>
+    <string name="signup_success">получилось, проверь почту для завершения регистрации</string>
+    <string name="show_password_button">Показать парол</string>
+    <string name="hide_password_button">Скрыть пароль</string>
+    <string name="signup_button">зарегаться</string>
+    <string name="login_button">войти</string>
+    <string name="email_field">почта</string>
+    <string name="password_field">пароль</string>
+    <string name="error_connection_short">нет подключения к интернету</string>
+    <string name="logout_button">выйти</string>
 </resources>
