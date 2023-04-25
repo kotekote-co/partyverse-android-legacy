@@ -32,12 +32,10 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import co.kotekote.partyverse.R
 import co.kotekote.partyverse.data.supabase.rememberSupabaseClient
 import co.kotekote.partyverse.ui.navigation.NavActions
-import co.kotekote.partyverse.ui.navigation.PreviewNavActions
 import io.github.jan.supabase.exceptions.BadRequestRestException
 import io.github.jan.supabase.exceptions.HttpRequestException
 import io.github.jan.supabase.exceptions.UnauthorizedRestException
@@ -129,7 +127,7 @@ fun LoginScreen(navActions: NavActions) {
             ),
             trailingIcon = {
                 IconButton(onClick = { setShowPassword(!showPassword) }) {
-                    Icon (
+                    Icon(
                         if (showPassword) Icons.Default.VisibilityOff
                         else Icons.Default.Visibility,
                         stringResource(
@@ -141,7 +139,7 @@ fun LoginScreen(navActions: NavActions) {
             }
         )
 
-        Row (
+        Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
@@ -183,20 +181,19 @@ fun LoginScreen(navActions: NavActions) {
             }
         }
         if (error != ErrorState.NONE) {
-            Text(when (error) {
-                ErrorState.CONNECTION -> stringResource(R.string.error_connection)
-                ErrorState.LOGIN_CREDENTIALS -> stringResource(R.string.error_login_credentials)
-                ErrorState.SIGNUP_CREDENTIALS -> stringResource(R.string.error_signup_credentials)
-                else -> stringResource(R.string.error_unknown)
-            }, color = MaterialTheme.colors.error)
+            Text(
+                when (error) {
+                    ErrorState.CONNECTION -> stringResource(R.string.error_connection)
+                    ErrorState.LOGIN_CREDENTIALS -> stringResource(R.string.error_login_credentials)
+                    ErrorState.SIGNUP_CREDENTIALS -> stringResource(R.string.error_signup_credentials)
+                    else -> stringResource(R.string.error_unknown)
+                }, color = MaterialTheme.colors.error
+            )
         }
     }
 
-    SnackbarHost(hostState = snackbarHostState)
-}
-
-@Preview
-@Composable
-fun LoginScreenPreview() {
-    LoginScreen(PreviewNavActions())
+    SnackbarHost(
+        hostState = snackbarHostState,
+        modifier = Modifier.statusBarsPadding()
+    )
 }
