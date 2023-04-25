@@ -67,7 +67,12 @@ private fun SettingsSection(title: String, content: @Composable () -> Unit) {
 }
 
 @Composable
-private fun EnumSettingsSection(title: String, values: List<String>, selected: Int, onChange: (Int) -> Unit = {}) {
+private fun EnumSettingsSection(
+    title: String,
+    values: List<String>,
+    selected: Int,
+    onChange: (Int) -> Unit = {}
+) {
     SettingsSection(title) {
         Column(
             modifier = Modifier.selectableGroup()

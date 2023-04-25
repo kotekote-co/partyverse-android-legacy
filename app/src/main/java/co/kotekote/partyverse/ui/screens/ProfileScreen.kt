@@ -22,12 +22,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import co.kotekote.partyverse.R
 import co.kotekote.partyverse.data.supabase.rememberSupabaseClient
 import co.kotekote.partyverse.ui.navigation.NavActions
-import co.kotekote.partyverse.ui.navigation.PreviewNavActions
 import io.github.jan.supabase.gotrue.SessionStatus
 import io.github.jan.supabase.gotrue.gotrue
 import kotlinx.coroutines.launch
@@ -67,10 +65,18 @@ fun ProfileScreen(navActions: NavActions) {
                         )
                     }
                 }
+
                 is SessionStatus.NetworkError -> {
-                    Icon(Icons.Default.SignalWifiConnectedNoInternet4, stringResource(R.string.error_connection_short))
-                    Text(stringResource(R.string.error_connection_short), style = MaterialTheme.typography.h5)
+                    Icon(
+                        Icons.Default.SignalWifiConnectedNoInternet4,
+                        stringResource(R.string.error_connection_short)
+                    )
+                    Text(
+                        stringResource(R.string.error_connection_short),
+                        style = MaterialTheme.typography.h5
+                    )
                 }
+
                 is SessionStatus.NotAuthenticated -> {
                     IconButton(navActions.openLogin) {
                         Icon(
@@ -79,6 +85,7 @@ fun ProfileScreen(navActions: NavActions) {
                         )
                     }
                 }
+
                 else -> {}
             }
 
@@ -90,10 +97,4 @@ fun ProfileScreen(navActions: NavActions) {
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun ProfileScreenPreview() {
-    ProfileScreen(PreviewNavActions())
 }
