@@ -30,7 +30,7 @@ fun PartyverseNavGraph(
             route = Routes.HOME,
             exitTransition = {
                 slideOutHorizontally(
-                    targetOffsetX = { -1500 },
+                    targetOffsetX = { -it },
                     animationSpec = tween(
                         durationMillis = 300,
                         easing = FastOutSlowInEasing
@@ -38,9 +38,9 @@ fun PartyverseNavGraph(
                 ) +
                         fadeOut(animationSpec = tween(300))
             },
-            popEnterTransition = {
+            enterTransition = {
                 slideInHorizontally(
-                    initialOffsetX = { -1500 },
+                    initialOffsetX = { -it },
                     animationSpec = tween(
                         durationMillis = 300,
                         easing = FastOutSlowInEasing
