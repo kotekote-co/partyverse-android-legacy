@@ -1,11 +1,18 @@
 package co.kotekote.partyverse.ui.screens
 
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -18,14 +25,19 @@ import androidx.compose.material.icons.filled.SignalWifiConnectedNoInternet4
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import co.kotekote.partyverse.R
 import co.kotekote.partyverse.data.supabase.rememberSupabaseClient
 import co.kotekote.partyverse.ui.navigation.NavActions
+import coil.compose.AsyncImage
 import io.github.jan.supabase.gotrue.SessionStatus
 import io.github.jan.supabase.gotrue.gotrue
 import kotlinx.coroutines.launch
@@ -35,11 +47,19 @@ fun ProfileScreen(navActions: NavActions) {
     val supabaseClient = rememberSupabaseClient()
     val scope = rememberCoroutineScope()
     val sessionStatus by supabaseClient.gotrue.sessionStatus.collectAsState()
+    var selectedImageUri by remember {
+        mutableStateOf<Uri?>(null)
+    }
+    val singlePhotoPickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.PickVisualMedia(),
+        onResult = { uri -> selectedImageUri = uri }
+    )
 
     Column(
         Modifier
             .statusBarsPadding()
-            .padding(16.dp, 0.dp)
+            .padding(16.dp, 0.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -96,5 +116,21 @@ fun ProfileScreen(navActions: NavActions) {
                 )
             }
         }
+
+        AsyncImage(
+            model = selectedImageUri,
+            contentDescription = null,
+            modifier = Modifier
+                .padding(top = 75.dp)
+                .size(150.dp)
+                .clip(RoundedCornerShape(100.dp))
+        )
+        Button(modifier = Modifier
+            .padding(top = 30.dp),
+            onClick = {
+                singlePhotoPickerLauncher.launch(
+                    PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                )
+            }) { Text(text = "change image") }
     }
 }
