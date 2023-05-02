@@ -7,6 +7,7 @@ import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.gotrue.GoTrue
 import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.realtime.Realtime
+import io.github.jan.supabase.storage.Storage
 
 object SupabaseSingleton {
     private var client: SupabaseClient? = null
@@ -23,6 +24,7 @@ object SupabaseSingleton {
                 }
                 install(Realtime)
                 install(Postgrest)
+                install(Storage)
             }
         }
         return client!!

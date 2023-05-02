@@ -13,7 +13,7 @@ android {
         minSdk 26
         targetSdk 33
         versionCode 1
-        versionName "pre-α 0.0.0.2"
+        versionName "pre-α 0.0.0.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -78,6 +78,7 @@ dependencies {
     implementation "io.github.jan-tennert.supabase:gotrue-kt:$supabase_version"
     implementation "io.github.jan-tennert.supabase:realtime-kt:$supabase_version"
     implementation "io.github.jan-tennert.supabase:postgrest-kt:$supabase_version"
+    implementation "io.github.jan-tennert.supabase:storage-kt:$supabase_version"
     implementation "androidx.core:core-splashscreen:1.0.1"
     implementation "io.coil-kt:coil-compose:2.3.0"
 }

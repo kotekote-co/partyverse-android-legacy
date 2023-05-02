@@ -1,6 +1,10 @@
 package co.kotekote.partyverse.ui.screens
 
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
 import android.net.Uri
+import android.os.Build
+import android.provider.MediaStore
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -32,6 +36,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import co.kotekote.partyverse.R
@@ -40,19 +45,48 @@ import co.kotekote.partyverse.ui.navigation.NavActions
 import coil.compose.AsyncImage
 import io.github.jan.supabase.gotrue.SessionStatus
 import io.github.jan.supabase.gotrue.gotrue
+import io.github.jan.supabase.storage.storage
 import kotlinx.coroutines.launch
+import java.io.ByteArrayOutputStream
+import java.util.UUID
 
 @Composable
 fun ProfileScreen(navActions: NavActions) {
     val supabaseClient = rememberSupabaseClient()
     val scope = rememberCoroutineScope()
     val sessionStatus by supabaseClient.gotrue.sessionStatus.collectAsState()
+    val currentStatus = sessionStatus
+    val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
     var selectedImageUri by remember {
         mutableStateOf<Uri?>(null)
     }
     val singlePhotoPickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia(),
-        onResult = { uri -> selectedImageUri = uri }
+        onResult = { uri ->
+            if (uri == null) return@rememberLauncherForActivityResult
+            selectedImageUri = uri
+            val bitmap =
+                if (Build.VERSION.SDK_INT < 28) {
+                    MediaStore.Images.Media.getBitmap(
+                        context.contentResolver,
+                        uri
+                    )
+                } else {
+                    val source = ImageDecoder.createSource(context.contentResolver, uri)
+                    ImageDecoder.decodeBitmap(source)
+                }
+            coroutineScope.launch {
+                val stream = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 60, stream)
+                if (currentStatus is SessionStatus.Authenticated) {
+                    val uuid = UUID.randomUUID().toString()
+                    val newFilename = (currentStatus.session.user?.id) + "/" + uuid + ".jpg"
+                    supabaseClient.storage["avatars"]
+                        .upload(newFilename, stream.toByteArray())
+                }
+            }
+        }
     )
 
     Column(
@@ -66,7 +100,6 @@ fun ProfileScreen(navActions: NavActions) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            val currentStatus = sessionStatus
             val logOut: () -> Unit = ({
                 scope.launch {
                     supabaseClient.gotrue.invalidateSession()
@@ -105,7 +138,6 @@ fun ProfileScreen(navActions: NavActions) {
                         )
                     }
                 }
-
                 else -> {}
             }
 
@@ -117,20 +149,22 @@ fun ProfileScreen(navActions: NavActions) {
             }
         }
 
-        AsyncImage(
-            model = selectedImageUri,
-            contentDescription = null,
-            modifier = Modifier
-                .padding(top = 75.dp)
-                .size(150.dp)
-                .clip(RoundedCornerShape(100.dp))
-        )
-        Button(modifier = Modifier
-            .padding(top = 30.dp),
-            onClick = {
-                singlePhotoPickerLauncher.launch(
-                    PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
-                )
-            }) { Text(text = "change image") }
+        if (currentStatus is SessionStatus.Authenticated) {
+            AsyncImage(
+                model = selectedImageUri,
+                contentDescription = null,
+                modifier = Modifier
+                    .padding(top = 75.dp)
+                    .size(150.dp)
+                    .clip(RoundedCornerShape(100.dp))
+            )
+            Button(modifier = Modifier
+                .padding(top = 30.dp),
+                onClick = {
+                    singlePhotoPickerLauncher.launch(
+                        PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                    )
+                }) { Text(text = "change image") }
+        }
     }
 }
