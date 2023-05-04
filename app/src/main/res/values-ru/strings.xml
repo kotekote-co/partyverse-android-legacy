@@ -18,7 +18,7 @@
     <string name="error_login_credentials">не удалось авторизоваться, наверное ты ввёл неверный логин или пароль</string>
     <string name="error_signup_credentials">не удалось создать аккаунт, похоже почта занята или некоторые поля неверно заполнены</string>
     <string name="signup_success">получилось, проверь почту для завершения регистрации</string>
-    <string name="show_password_button">Показать парол</string>
+    <string name="show_password_button">Показать пароль</string>
     <string name="hide_password_button">Скрыть пароль</string>
     <string name="signup_button">зарегаться</string>
     <string name="login_button">войти</string>
