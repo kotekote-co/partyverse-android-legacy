@@ -27,6 +27,7 @@ import androidx.compose.material.icons.filled.Logout
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.SignalWifiConnectedNoInternet4
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -40,11 +41,15 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import co.kotekote.partyverse.R
+import co.kotekote.partyverse.data.Profile
+import co.kotekote.partyverse.data.generateAvatarUrl
+import co.kotekote.partyverse.data.getProfile
 import co.kotekote.partyverse.data.supabase.rememberSupabaseClient
 import co.kotekote.partyverse.ui.navigation.NavActions
 import coil.compose.AsyncImage
 import io.github.jan.supabase.gotrue.SessionStatus
 import io.github.jan.supabase.gotrue.gotrue
+import io.github.jan.supabase.postgrest.postgrest
 import io.github.jan.supabase.storage.storage
 import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
@@ -58,9 +63,25 @@ fun ProfileScreen(navActions: NavActions) {
     val currentStatus = sessionStatus
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
+
     var selectedImageUri by remember {
         mutableStateOf<Uri?>(null)
     }
+    var serverAvatarData by remember {
+        mutableStateOf<ByteArray?>(null)
+    }
+
+    LaunchedEffect(sessionStatus, supabaseClient, currentStatus) {
+        if (currentStatus !is SessionStatus.Authenticated) return@LaunchedEffect
+        scope.launch {
+            val profile = getProfile(supabaseClient, currentStatus)
+            profile.avatarUrl?.let {
+                val data = supabaseClient.storage["avatars"].downloadAuthenticated(it)
+                serverAvatarData = data
+            }
+        }
+    }
+
     val singlePhotoPickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia(),
         onResult = { uri ->
@@ -68,6 +89,7 @@ fun ProfileScreen(navActions: NavActions) {
             selectedImageUri = uri
             val bitmap =
                 if (Build.VERSION.SDK_INT < 28) {
+                    @Suppress("DEPRECATION")
                     MediaStore.Images.Media.getBitmap(
                         context.contentResolver,
                         uri
@@ -80,10 +102,24 @@ fun ProfileScreen(navActions: NavActions) {
                 val stream = ByteArrayOutputStream()
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 60, stream)
                 if (currentStatus is SessionStatus.Authenticated) {
+                    val profile = getProfile(supabaseClient, currentStatus)
                     val uuid = UUID.randomUUID().toString()
-                    val newFilename = (currentStatus.session.user?.id) + "/" + uuid + ".jpg"
-                    supabaseClient.storage["avatars"]
-                        .upload(newFilename, stream.toByteArray())
+
+                    supabaseClient.storage["avatars"].upload(generateAvatarUrl(
+                        profile.id, uuid
+                    ), stream.toByteArray())
+
+                    val avatarUrl = profile.avatarUrl
+                    if (avatarUrl != null) supabaseClient.storage["avatars"].delete(avatarUrl)
+
+                    supabaseClient.postgrest["profiles"]
+                        .update(
+                            {
+                                Profile::avatar setTo uuid
+                            }
+                        ) {
+                            Profile::id eq profile.id
+                        }
                 }
             }
         }
@@ -151,7 +187,7 @@ fun ProfileScreen(navActions: NavActions) {
 
         if (currentStatus is SessionStatus.Authenticated) {
             AsyncImage(
-                model = selectedImageUri,
+                model = selectedImageUri ?: serverAvatarData,
                 contentDescription = null,
                 modifier = Modifier
                     .padding(top = 75.dp)
