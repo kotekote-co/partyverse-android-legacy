@@ -25,4 +25,5 @@
     <string name="password_field">pass</string>
     <string name="error_connection_short">no internet connection</string>
     <string name="logout_button">logout</string>
+    <string name="not_authenticated">you need to log in first</string>
 </resources>

@@ -56,13 +56,16 @@ fun RuntimePermissionPopup(
                     askedBefore.value = true
                     permissionState.launchPermissionRequest()
                 }
+
                 RuntimePermissionState.DENIED -> {
                     permissionState.launchPermissionRequest()
                 }
+
                 RuntimePermissionState.DENIED_FOREVER -> {
                     (context as? Activity)?.finish()
                         ?: error("context is not an activity")
                 }
+
                 RuntimePermissionState.GRANTED -> {
                     // should never happen
                     error("runtime permission popup is displayed but permission is granted")

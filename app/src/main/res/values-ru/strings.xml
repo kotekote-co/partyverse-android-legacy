@@ -26,4 +26,5 @@
     <string name="password_field">пароль</string>
     <string name="error_connection_short">нет подключения к интернету</string>
     <string name="logout_button">выйти</string>
+    <string name="not_authenticated">сначала тебе нужно войти</string>
 </resources>

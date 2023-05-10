@@ -105,9 +105,11 @@ fun ProfileScreen(navActions: NavActions) {
                     val profile = getProfile(supabaseClient, currentStatus)
                     val uuid = UUID.randomUUID().toString()
 
-                    supabaseClient.storage["avatars"].upload(generateAvatarUrl(
-                        profile.id, uuid
-                    ), stream.toByteArray())
+                    supabaseClient.storage["avatars"].upload(
+                        generateAvatarUrl(
+                            profile.id, uuid
+                        ), stream.toByteArray()
+                    )
 
                     val avatarUrl = profile.avatarUrl
                     if (avatarUrl != null) supabaseClient.storage["avatars"].delete(avatarUrl)
@@ -173,7 +175,12 @@ fun ProfileScreen(navActions: NavActions) {
                             contentDescription = stringResource(R.string.login_button)
                         )
                     }
+                    Text(
+                        stringResource(id = R.string.not_authenticated),
+                        style = MaterialTheme.typography.h6
+                    )
                 }
+
                 else -> {}
             }
 
