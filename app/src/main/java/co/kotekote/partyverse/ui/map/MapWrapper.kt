@@ -6,16 +6,15 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.constraintlayout.compose.ConstraintLayout
+import co.kotekote.partyverse.R
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
 import com.mapbox.geojson.Point
 import com.mapbox.maps.MapView
 import com.mapbox.maps.plugin.locationcomponent.location
-import co.kotekote.partyverse.R
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
@@ -54,7 +53,7 @@ fun MapWrapper(
         }
 
         AndroidView(
-            factory = {mapView},
+            factory = { mapView },
             modifier = Modifier.constrainAs(mapboxMap) {
                 top.linkTo(parent.top)
                 bottom.linkTo(parent.bottom)
@@ -63,10 +62,4 @@ fun MapWrapper(
             }
         )
     }
-}
-
-@Preview
-@Composable
-fun MapWrapperPreview() {
-    MapWrapper()
 }
