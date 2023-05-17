@@ -1,8 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id "com.google.protobuf" version '0.9.0'
-    id 'org.jetbrains.kotlin.plugin.serialization' version '1.8.10'
+    id "com.google.protobuf" version '0.9.3'
+    id 'org.jetbrains.kotlin.plugin.serialization' version '1.8.21'
 }
 
 android {
@@ -40,7 +40,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion '1.4.0'
+        kotlinCompilerExtensionVersion '1.4.3'
     }
     packagingOptions {
         resources {
@@ -51,13 +51,13 @@ android {
 
 dependencies {
 
-    implementation "androidx.core:core-ktx:1.10.0"
+    implementation "androidx.core:core-ktx:1.10.1"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.6.1"
     implementation "androidx.activity:activity-compose:1.7.1"
     implementation "androidx.compose.ui:ui:$compose_ui_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_ui_version"
     implementation "androidx.compose.material:material:1.4.3"
-    implementation "androidx.core:core-ktx:1.10.0"
+    implementation "androidx.core:core-ktx:1.10.1"
     implementation "androidx.constraintlayout:constraintlayout-compose:1.0.1"
     testImplementation "junit:junit:4.13.2"
     androidTestImplementation "androidx.test.ext:junit:1.1.5"
@@ -65,17 +65,17 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
-    implementation "com.google.accompanist:accompanist-permissions:0.28.0"
-    implementation "com.google.accompanist:accompanist-navigation-animation:0.31.0-alpha"
+    implementation "com.google.accompanist:accompanist-permissions:0.30.1"
+    implementation "com.google.accompanist:accompanist-navigation-animation:0.31.2-alpha"
     implementation "androidx.compose.material:material-icons-extended:1.4.3"
     implementation "androidx.navigation:navigation-compose:2.5.3"
     implementation "androidx.datastore:datastore:1.0.0"
-    implementation "com.google.protobuf:protobuf-javalite:3.18.0"
-    implementation "com.google.accompanist:accompanist-systemuicontroller:0.31.1-alpha"
+    implementation "com.google.protobuf:protobuf-javalite:3.21.12"
+    implementation "com.google.accompanist:accompanist-systemuicontroller:0.31.2-alpha"
 
     implementation "com.mapbox.maps:android:10.13.0"
 
-    implementation "io.ktor:ktor-client-cio:2.2.4"
+    implementation "io.ktor:ktor-client-cio:2.3.0"
     implementation "io.github.jan-tennert.supabase:gotrue-kt:$supabase_version"
     implementation "io.github.jan-tennert.supabase:realtime-kt:$supabase_version"
     implementation "io.github.jan-tennert.supabase:postgrest-kt:$supabase_version"
@@ -86,7 +86,7 @@ dependencies {
 
 protobuf {
     protoc {
-        artifact = "com.google.protobuf:protoc:3.21.7"
+        artifact = "com.google.protobuf:protoc:3.23.0"
     }
 
     generateProtoTasks {
