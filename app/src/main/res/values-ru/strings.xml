@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">пативёрс</string>
     <string name="location_request">для того чтобы делиться своим местоположением с друзьями, тебе нужно дать приложению доступ к геолокации</string>
