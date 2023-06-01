@@ -2,15 +2,28 @@ package co.kotekote.partyverse.ui.screens
 
 import android.Manifest
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.BottomSheetScaffold
+import androidx.compose.material.Button
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.ListItem
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.NearMe
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
@@ -98,9 +111,8 @@ fun MainScreen(
             )
 
             IconButton(modifier = Modifier
-                .statusBarsPadding()
-                .align(Alignment.BottomStart)
-                .padding(start = 15.dp, bottom = 140.dp)
+                .align(Alignment.BottomEnd)
+                .padding(end = 15.dp, bottom = 140.dp)
                 .background(MaterialTheme.colors.primary, shape = RoundedCornerShape(10.dp))
                 .size(40.dp),
                 onClick = {
@@ -121,7 +133,7 @@ fun MainScreen(
                 onClick = navActions.openProfile,
                 modifier = Modifier
                     .statusBarsPadding()
-                    .padding(top = 6.dp, end = 10.dp)
+                    .padding(top = 6.dp, end = 15.dp)
                     .align(Alignment.TopEnd)
             ) {
                 Icon(
