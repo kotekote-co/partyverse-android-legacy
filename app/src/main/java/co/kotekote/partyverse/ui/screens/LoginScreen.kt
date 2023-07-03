@@ -1,6 +1,7 @@
 package co.kotekote.partyverse.ui.screens
 
 import android.util.Log
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -33,9 +34,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
+import androidx.navigation.NavOptions
+import com.google.accompanist.navigation.animation.composable
 import co.kotekote.partyverse.R
 import co.kotekote.partyverse.data.supabase.rememberSupabaseClient
-import co.kotekote.partyverse.ui.navigation.NavActions
 import io.github.jan.supabase.exceptions.BadRequestRestException
 import io.github.jan.supabase.exceptions.HttpRequestException
 import io.github.jan.supabase.exceptions.UnauthorizedRestException
@@ -53,8 +57,22 @@ enum class ErrorState {
     UNKNOWN
 }
 
+const val loginNavigationRoute = "login"
+
+@OptIn(ExperimentalAnimationApi::class)
+fun NavGraphBuilder.loginScreen() {
+    composable(route = loginNavigationRoute) {
+        LoginScreen()
+    }
+}
+
+fun NavHostController.openLogin(navOptions: NavOptions? = null) {
+    this.navigate(loginNavigationRoute, navOptions)
+}
+
+
 @Composable
-fun LoginScreen(navActions: NavActions) {
+fun LoginScreen() {
     val supabaseClient = rememberSupabaseClient()
     val coroutineScope = rememberCoroutineScope()
     val sessionStatus = supabaseClient.gotrue.sessionStatus.collectAsState()
@@ -91,7 +109,7 @@ fun LoginScreen(navActions: NavActions) {
 
     LaunchedEffect(sessionStatus.value) {
         if (sessionStatus.value is SessionStatus.Authenticated) {
-            navActions.navigateHome()
+            // TODO HOME
         }
     }
 
@@ -150,7 +168,7 @@ fun LoginScreen(navActions: NavActions) {
                             this.email = email
                             this.password = password
                         }
-                        navActions.navigateHome()
+                        // TODO HOME
                     }
                 },
                 enabled = areFieldsValid,

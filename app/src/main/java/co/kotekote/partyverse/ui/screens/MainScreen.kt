@@ -1,6 +1,7 @@
 package co.kotekote.partyverse.ui.screens
 
 import android.Manifest
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -19,12 +20,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavGraphBuilder
 import co.kotekote.partyverse.R
 import co.kotekote.partyverse.ui.map.MapWrapper
 import co.kotekote.partyverse.ui.map.getDefaultCamera
 import co.kotekote.partyverse.ui.map.rememberMapView
-import co.kotekote.partyverse.ui.navigation.NavActions
 import co.kotekote.partyverse.ui.permissions.RuntimePermissionPopup
+import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
 import com.mapbox.android.gestures.MoveGestureDetector
@@ -33,10 +35,23 @@ import com.mapbox.maps.plugin.animation.flyTo
 import com.mapbox.maps.plugin.gestures.OnMoveListener
 import com.mapbox.maps.plugin.gestures.gestures
 
+const val homeNavigationRoute = "home"
+
+@OptIn(ExperimentalAnimationApi::class)
+fun NavGraphBuilder.homeScreen(
+    onSelfProfileClick: () -> Unit
+) {
+    composable(
+        route = homeNavigationRoute
+    ) {
+        MainScreen(onSelfProfileClick)
+    }
+}
+
 @OptIn(ExperimentalPermissionsApi::class, ExperimentalMaterialApi::class)
 @Composable
 fun MainScreen(
-    navActions: NavActions
+    onSelfProfileClick: () -> Unit
 ) {
     val locationPermissionState = rememberPermissionState(
         permission = Manifest.permission.ACCESS_FINE_LOCATION
@@ -118,7 +133,7 @@ fun MainScreen(
             }
 
             Button(
-                onClick = navActions.openProfile,
+                onClick = onSelfProfileClick,
                 modifier = Modifier
                     .statusBarsPadding()
                     .padding(top = 6.dp, end = 10.dp)

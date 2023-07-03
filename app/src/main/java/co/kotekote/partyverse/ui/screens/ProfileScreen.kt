@@ -8,6 +8,10 @@ import android.provider.MediaStore
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -40,13 +44,16 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
+import androidx.navigation.NavOptions
 import co.kotekote.partyverse.R
 import co.kotekote.partyverse.data.Profile
 import co.kotekote.partyverse.data.generateAvatarUrl
 import co.kotekote.partyverse.data.getProfile
 import co.kotekote.partyverse.data.supabase.rememberSupabaseClient
-import co.kotekote.partyverse.ui.navigation.NavActions
 import coil.compose.AsyncImage
+import com.google.accompanist.navigation.animation.composable
 import io.github.jan.supabase.gotrue.SessionStatus
 import io.github.jan.supabase.gotrue.gotrue
 import io.github.jan.supabase.postgrest.postgrest
@@ -55,8 +62,38 @@ import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
 import java.util.UUID
 
+const val profileNavigationRoute = "profile"
+
+@OptIn(ExperimentalAnimationApi::class)
+fun NavGraphBuilder.profileScreen(
+    onSettingsClick: () -> Unit,
+    onLoginClick: () -> Unit
+) {
+    composable(
+        route = profileNavigationRoute,
+        enterTransition = {
+            slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Left, animationSpec = tween(300))
+        },
+        popExitTransition = {
+            slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Right, animationSpec = tween(300))
+        },
+        popEnterTransition = {
+            null
+        }
+    ) {
+        ProfileScreen(onSettingsClick, onLoginClick)
+    }
+}
+
+fun NavHostController.openProfile(id: Int, navOptions: NavOptions? = null) {
+    this.navigate(profileNavigationRoute, navOptions)
+}
+
 @Composable
-fun ProfileScreen(navActions: NavActions) {
+fun ProfileScreen(
+    onSettingsClick: () -> Unit,
+    onLoginClick: () -> Unit
+) {
     val supabaseClient = rememberSupabaseClient()
     val scope = rememberCoroutineScope()
     val sessionStatus by supabaseClient.gotrue.sessionStatus.collectAsState()
@@ -129,6 +166,7 @@ fun ProfileScreen(navActions: NavActions) {
 
     Column(
         Modifier
+            .background(MaterialTheme.colors.background)
             .statusBarsPadding()
             .padding(16.dp, 0.dp),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -169,7 +207,7 @@ fun ProfileScreen(navActions: NavActions) {
                 }
 
                 is SessionStatus.NotAuthenticated -> {
-                    IconButton(navActions.openLogin) {
+                    IconButton(onLoginClick) {
                         Icon(
                             Icons.Default.Login,
                             contentDescription = stringResource(R.string.login_button)
@@ -184,7 +222,7 @@ fun ProfileScreen(navActions: NavActions) {
                 else -> {}
             }
 
-            IconButton(navActions.openSettings) {
+            IconButton(onSettingsClick) {
                 Icon(
                     Icons.Default.Settings,
                     contentDescription = stringResource(R.string.open_settings_button)

@@ -1,7 +1,6 @@
 package co.kotekote.partyverse.ui.map
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -9,7 +8,10 @@ import co.kotekote.partyverse.R
 import co.kotekote.partyverse.ui.theme.LocalDarkThemeState
 import com.mapbox.geojson.Point
 import com.mapbox.maps.CameraOptions
+import com.mapbox.maps.MapInitOptions
+import com.mapbox.maps.MapOptions
 import com.mapbox.maps.MapView
+import com.mapbox.maps.applyDefaultParams
 import com.mapbox.maps.plugin.attribution.attribution
 import com.mapbox.maps.plugin.compass.compass
 import com.mapbox.maps.plugin.logo.logo
@@ -25,17 +27,19 @@ fun rememberMapView(): MapView {
         else R.string.mapbox_light_style_url
     )
 
-    val mapView = remember {
-        MapView(context).apply {
+    val mapView = remember(mapboxStyleUri) {
+        MapView(context, MapInitOptions(
+            context,
+            styleUri = mapboxStyleUri,
+            mapOptions = MapOptions.Builder()
+                .applyDefaultParams(context)
+                .build()
+        )).apply {
             scalebar.enabled = false
             attribution.enabled = false
             logo.enabled = false
             compass.enabled = false
         }
-    }
-
-    LaunchedEffect(mapboxStyleUri) {
-        mapView.getMapboxMap().loadStyleUri(mapboxStyleUri)
     }
 
     return mapView

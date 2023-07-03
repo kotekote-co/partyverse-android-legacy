@@ -1,6 +1,7 @@
 package co.kotekote.partyverse.ui.screens
 
 import Settings
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
@@ -18,15 +19,31 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
+import androidx.navigation.NavOptions
+import com.google.accompanist.navigation.animation.composable
 import co.kotekote.partyverse.R
 import co.kotekote.partyverse.data.settings.settingsDataStore
 import co.kotekote.partyverse.data.settings.themePreferenceState
-import co.kotekote.partyverse.ui.navigation.NavActions
-import co.kotekote.partyverse.ui.navigation.PreviewNavActions
 import kotlinx.coroutines.launch
 
+const val settingsNavigationRoute = "settings"
+
+@OptIn(ExperimentalAnimationApi::class)
+fun NavGraphBuilder.settingsScreen() {
+    composable(route = settingsNavigationRoute) {
+        SettingsScreen()
+    }
+}
+
+fun NavHostController.openSettings(navOptions: NavOptions? = null) {
+    this.navigate(settingsNavigationRoute, navOptions)
+}
+
+
 @Composable
-fun SettingsScreen(@Suppress("UNUSED_PARAMETER") navActions: NavActions) {
+fun SettingsScreen() {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
     val currentThemePreference by themePreferenceState(context)
@@ -110,5 +127,5 @@ private fun EnumSettingsSection(
 @Preview(showBackground = true)
 @Composable
 fun SettingsScreenPreview() {
-    SettingsScreen(PreviewNavActions())
+    SettingsScreen()
 }
